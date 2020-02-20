@@ -29,4 +29,9 @@ router.post('/', async (req, res) => {
     res.send({name: category.name, description: category.description, id: result.insertId});
 });
 
+router.delete('/:id', async (req, res) => {
+    await mysqlDb.getConnection().query('DELETE FROM `categories` WHERE `id`= ?', req.params.id);
+    res.send({"message": "category is deleted"});
+});
+
 module.exports = router;

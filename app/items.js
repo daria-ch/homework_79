@@ -44,7 +44,19 @@ router.post('/', upload.single('image'), async (req, res) => {
     const result = await mysqlDb.getConnection().query('INSERT INTO `items` (`category_id`, `place_id`, `title`, `description`, `image`) VALUES ' +
         '(?, ? ,? ,?, ?)',
         [item.categoryId, item.placeId, item.title, item.description, item.image]);
-    res.send({id: result.insertId});
+    res.send({
+        categoryId: item.categoryId,
+        placeId: item.placeId,
+        title: item.title,
+        description: item.description,
+        image: item.image,
+        id: result.insertId
+    });
+});
+
+router.delete('/:id', async (req, res) => {
+    await mysqlDb.getConnection().query('DELETE FROM `items` WHERE `id`= ?', req.params.id);
+    res.send({"message": "item is deleted"});
 });
 
 module.exports = router;

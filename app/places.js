@@ -26,4 +26,9 @@ router.post('/', async (req, res) => {
     res.send({name: place.name, description: place.description, id: result.insertId});
 });
 
+router.delete('/:id', async (req, res) => {
+    await mysqlDb.getConnection().query('DELETE FROM `places` WHERE `id`= ?', req.params.id);
+    res.send({"message": "place is deleted"});
+});
+
 module.exports = router;
