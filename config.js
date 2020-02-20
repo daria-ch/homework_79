@@ -5,10 +5,10 @@ const rootPath = __dirname;
 module.exports = {
     rootPath,
     uploadPath: path.join(rootPath, 'public', 'uploads'),
-    database:{
+    database: {
         host: 'localhost',
         user: 'user',
         password: 'pbytlby',
-        database: 'study'
+        database: 'Items'
     }
 };
